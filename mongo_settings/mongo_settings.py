@@ -7,6 +7,11 @@ from .attributes import FromMongo
 
 
 class MongoEnvMixin:
+    """
+    Special handler for FromMongo attributes.
+    Set connection with MongoDB collection.
+    Use cache for variables from MongoDB.
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         m_con = self.MongoConnector
@@ -46,6 +51,9 @@ class MongoEnvMixin:
 
 
 class FromMongoSettings(MongoEnvMixin, BaseSettings):
+    """
+    Base class for access to variables from MongoDB.
+    """
     def __init__(self, *args, **kwargs):
         try:
             self.MongoConnector
@@ -54,3 +62,8 @@ class FromMongoSettings(MongoEnvMixin, BaseSettings):
                 f"{type(self).__name__!r} object has not required attribute 'MongoConnector'"
             )
         super().__init__(*args, **kwargs)
+
+
+__all__ = [
+    'FromMongoSettings'
+]
