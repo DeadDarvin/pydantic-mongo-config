@@ -24,9 +24,9 @@ class FromMongo:
                 line_errors=[
                     InitErrorDetails(
                         type=PydanticCustomError(
-                            error_type=f"Input should be a valid {self.env_type}, "
-                            f"unable to parse {value} as an {self.env_type}",
-                            message_template="some"
+                            "mongo_parsing",
+                            f"Input should be a valid {self.env_type}, "
+                            f"unable to parse {value} as an {self.env_type}"
                         )
                     )
                 ]
