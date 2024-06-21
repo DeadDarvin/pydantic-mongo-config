@@ -7,7 +7,7 @@ AllowedType: TypeAlias = float | list | set | dict
 
 
 class FromMongo:
-    def __init__(self, _type: Type[AllowedType],  default: Any | None):
+    def __init__(self, _type: Type[AllowedType],  default: Any | None = None):
         self.env_type = _type
         self.default = default
 
@@ -18,15 +18,15 @@ class FromMongo:
         value = res["value"]
         try:
             return self.env_type(value)
-        except ValueError:
+        except (TypeError, ValueError):
             raise ValidationError.from_exception_data(
                 title=type(self).__name__,
                 line_errors=[
                     InitErrorDetails(
                         type=PydanticCustomError(
                             "mongo_parsing",
-                            f"Input should be a valid {self.env_type}, "
-                            f"unable to parse {value} as an {self.env_type}"
+                            f"Input should be a valid {self.env_type.__name__}, "
+                            f"unable to parse {value} as an {self.env_type.__name__}"
                         )
                     )
                 ]
