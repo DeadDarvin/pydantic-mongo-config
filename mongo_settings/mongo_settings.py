@@ -40,10 +40,10 @@ class MongoEnvMixin:
     @staticmethod
     def _get_env_collection(db: str, collection: str, creds: BaseSettings) -> Collection:
         client = MongoClient(
-            host=creds.host,
-            port=creds.port,
-            username=creds.username,
-            password=creds.password
+            host=creds.MONGO_DB_ADDRESS,
+            port=creds.MONGO_DB_PORT,
+            username=creds.MONGO_DB_USER,
+            password=creds.MONGO_DB_PASSWORD
         )
         db = client[db]
         collection = db[collection]
