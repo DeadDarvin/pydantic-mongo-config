@@ -11,15 +11,16 @@ from pydantic_mongo_config import FromMongoSettings, FromMongo
 ### 2. Create BaseSettings contains mongo credentials.
 ```python
 class MongoCreds(BaseSettings):
-    host: str
-    port: int
-    username: str
-    password: str
+    MONGO_DB_ADDRESS: str
+    MONGO_DB_PORT: int
+    MONGO_DB_USER: str
+    MONGO_DB_PASSWORD: str
 
     class Config:
         case_sensitive = False
-        env_file = '.mongo_env'
+        env_file = '.env'
         env_file_encoding = 'utf-8'
+        extra = 'ignore'
 ```
 ### 3. Create any standard Settings contains your variables. Inherit from FromMongoSettings
 ```python
