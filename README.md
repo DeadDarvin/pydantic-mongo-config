@@ -45,7 +45,7 @@ class Settings(FromMongoSettings):
 ### 5. Use FromMongo for declare attribute as field from MongoDB
 ```python
 class Settings(FromMongoSettings):
-    FROM_MONGO_ENV = FromMongo(str, "Any default value")
+    FROM_MONGO_ENV: FromMongo = FromMongo(str, "Any default value")
 ```
 ### 6. Result
 ```python
@@ -68,7 +68,7 @@ class MongoCreds(BaseSettings):
 class Settings(FromMongoSettings):
     HARDCODE_ENV: str = 'value'
     FROM_FILE_ENV: str
-    FROM_MONGO_ENV = FromMongo(str, "Any default value")
+    FROM_MONGO_ENV: FromMongo = FromMongo(str, "Any default value")
     
     class Config:
         case_sensitive = False
